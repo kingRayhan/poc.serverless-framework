@@ -1,5 +1,4 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
-import { randomUUID } from "crypto";
 
 const products = [
   {
@@ -24,14 +23,14 @@ const products = [
   },
 ];
 
-const _index: APIGatewayProxyHandler = async () => {
+const index: APIGatewayProxyHandler = async () => {
   return {
     statusCode: 200,
     body: JSON.stringify(products),
   };
 };
 
-const show: APIGatewayProxyHandler = async (event, context) => {
+const show: APIGatewayProxyHandler = async (event) => {
   const productId = event.pathParameters!.id;
   const product = products.find((p) => p.id == productId);
 
@@ -49,5 +48,5 @@ const show: APIGatewayProxyHandler = async (event, context) => {
   };
 };
 
-exports.index = _index;
+exports.index = index;
 exports.show = show;
